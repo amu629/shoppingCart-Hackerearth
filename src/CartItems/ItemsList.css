@@ -1,0 +1,32 @@
+.shoppingCartItemsClass {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 40px;
+    height: 100%;
+  }
+
+@media only screen  and (max-width: 600px) {
+  .shoppingCartItemsClass {
+    float: none;
+    order: 2;
+  }
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+th {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+  }
+
+  td {
+    text-align: center;
+    padding: 8px;
+  }
+  
