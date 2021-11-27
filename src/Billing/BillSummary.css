@@ -1,0 +1,22 @@
+  .billParentClass {
+    width: 300px;
+    display: inline-block;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    height: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .priceDetailsClass {
+    padding: 10px 20px 15px 20px;
+  }
+
+  .finalBillPriceClass {
+    background-color: #d4d8d8;
+    padding: 12px 4px;
+  }
+  
+  span.finalPriceValueClass {
+    float: right;
+    color: grey;
+  }
