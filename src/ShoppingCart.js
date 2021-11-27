@@ -18,6 +18,12 @@ export default class ShoppingCart extends React.Component {
   }
 
   handleReload = () => {
+    this.setState({
+      shoppingCartData: this.parseShoppingCartData(),
+      displayQuantity: Data.length,
+      showItemRemovedAlert: false,
+      deletedItemName: ""
+    });
   };
 
   parseShoppingCartData = () => {
@@ -38,15 +44,60 @@ export default class ShoppingCart extends React.Component {
   };
 
   handleDecreaseItemQuantity = (itemId) => {
+    var newItemList = [];
+    this.state.shoppingCartData.forEach((el) => {
+      if (el.id === itemId) {
+        el.quantity = el.quantity - 1;
+      }
+
+      newItemList.push(el);
+    });
+    this.setState({
+      shoppingCartData: newItemList,
+      displayQuantity: this.state.displayQuantity - 1,
+    });
   };
 
   handleIncreaseItemQuantity = (itemId) => {
+    var newItemList = [];
+    this.state.shoppingCartData.forEach((shoppingCartItem) => {
+      if (shoppingCartItem.id === itemId) {
+        shoppingCartItem.quantity = shoppingCartItem.quantity + 1;
+      }
+
+      newItemList.push(shoppingCartItem);
+    });
+    this.setState({
+      shoppingCartData: newItemList,
+      displayQuantity: this.state.displayQuantity + 1,
+    });
   };
 
   handleDeleteItemFromCart = (itemId) => {
+    var newItemList = [];
+    var deletedItemQuantity = 0;
+    var deletedItemName = "";
+    this.state.shoppingCartData.forEach((shoppingCartItem) => {
+      if (shoppingCartItem.id !== itemId) {
+        newItemList.push(shoppingCartItem);
+      } else {
+        deletedItemQuantity = shoppingCartItem.quantity;
+        deletedItemName = shoppingCartItem.name;
+      }
+    });
+    this.setState({
+      shoppingCartData: newItemList,
+      displayQuantity: this.state.displayQuantity - deletedItemQuantity,
+      showItemRemovedAlert: true,
+      deletedItemName: deletedItemName
+    });
   };
 
   handleAlertClose = () => {
+    this.setState({
+      showItemRemovedAlert: false,
+      deletedItemName: ""
+    });
   };
 
   render() {
@@ -59,6 +110,13 @@ export default class ShoppingCart extends React.Component {
         {this.state.displayQuantity === 0 && (
           <button
             onClick={this.handleReload}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "powderblue",
+              border: "1px solid",
+              borderRadius: "4px",
+              cursor: "pointer"
+            }}
           >
             {ShoppingCartStrings.ReloadText}
           </button>
